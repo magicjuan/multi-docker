@@ -1,5 +1,12 @@
 if [[ $OSTYPE == 'darwin'* ]]; then
   FIND_COMMAND=gfind
+  if [[ ! $(which $FIND_COMMAND) ]]
+  then
+    echo gfind is required on Mac OSX
+    echo To install gfind with homebrew:
+    echo "  brew install findutils"
+    exit
+  fi
 else
   FIND_COMMAND=find
 fi
