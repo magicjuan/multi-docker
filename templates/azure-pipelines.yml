@@ -11,19 +11,20 @@ pool:
 
 steps:
 - script: |
-    cd odbc-base
+    cd dockername
     make cloud-build
   displayName: 'run Make'
 
 - task: Docker@2
   displayName: 'docker build bionic'
   inputs:
-    containerRegistry: 'ucarepocimageregistry.azurecr.io'
+    containerRegistry: 'myreponame.azurecr.io'
     repository: 'odbc-base'
     command: 'buildAndPush'
-    Dockerfile: 'odbc-base/bionic/Dockerfile'
+    Dockerfile: 'dockername/bionic/Dockerfile'
     tags: |
       bionic
       18.04
       ubuntu18.04
       ubuntu
+      latest
