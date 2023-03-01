@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    cd odbc-base
+    make cloud-build
+  displayName: 'run Make'
+
+- task: Docker@2
+  displayName: 'docker build bionic'
+  inputs:
+    containerRegistry: 'ucarepocimageregistry.azurecr.io'
+    repository: 'odbc-base'
+    command: 'buildAndPush'
+    Dockerfile: 'odbc-base/bionic/Dockerfile'
+    tags: |
+      bionic
+      18.04
+      ubuntu18.04
+      ubuntu
