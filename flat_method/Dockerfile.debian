@@ -1,4 +1,8 @@
-FROM debian:bookworm
+ARG _BUILD_ARGS_REPO
+ARG _BUILD_ARGS_FROM
+ARG _BUILD_ARGS_FROM_TAG
+
+FROM $_BUILD_ARGS_REPO/$_BUILD_ARGS_FROM:$_BUILD_ARGS_FROM_TAG
 # RUN apt-get update \
 # 	&& apt-get install -y lftp \
 # 	&& apt-get clean \
